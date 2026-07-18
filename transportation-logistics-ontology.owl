@@ -1,0 +1,1037 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.semanticweb.org/kr-project/transportation-logistics-ontology"
+         xmlns="http://www.semanticweb.org/kr-project/transportation-logistics-ontology#"
+         xmlns:swrl="http://www.w3.org/2003/11/swrl#">
+
+<owl:Ontology rdf:about="http://www.semanticweb.org/kr-project/transportation-logistics-ontology"/>
+
+<owl:ObjectProperty rdf:about="#hasOrigin">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasDestination">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#transportedBy">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Vehicle"/>
+  <owl:inverseOf rdf:resource="#transports"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#transports">
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="#Shipment"/>
+  <owl:inverseOf rdf:resource="#transportedBy"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#operatedBy">
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="#Carrier"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#drivenBy">
+  <rdfs:domain rdf:resource="#RoadVehicle"/>
+  <rdfs:range rdf:resource="#Driver"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasRoute">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Route"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasSegment">
+  <rdfs:domain rdf:resource="#Route"/>
+  <rdfs:range rdf:resource="#RouteSegment"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#nextSegment">
+  <rdfs:domain rdf:resource="#RouteSegment"/>
+  <rdfs:range rdf:resource="#RouteSegment"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#usesMode">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RouteSegment"/>
+  <rdfs:range rdf:resource="#TransportMode"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#departsFrom">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RouteSegment"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#arrivesAt">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RouteSegment"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#shippedBy">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Shipper"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#consignedTo">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Consignee"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#handledBy">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Agent"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#contains">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Cargo"/>
+  <owl:inverseOf rdf:resource="#partOfShipment"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#partOfShipment">
+  <rdfs:domain rdf:resource="#Cargo"/>
+  <rdfs:range rdf:resource="#Shipment"/>
+  <owl:inverseOf rdf:resource="#contains"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#storedAt">
+  <rdfs:domain rdf:resource="#Cargo"/>
+  <rdfs:range rdf:resource="#Facility"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasStatus">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#ShipmentStatus"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#hasEvent">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#TransportEvent"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#occursAt">
+  <rdfs:domain rdf:resource="#TransportEvent"/>
+  <rdfs:range rdf:resource="#Location"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#requiresDocument">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#LogisticsDocument"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#ownedBy">
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="#Carrier"/>
+</owl:ObjectProperty>
+
+<owl:ObjectProperty rdf:about="#partOfOrder">
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="#Order"/>
+</owl:ObjectProperty>
+
+<owl:DatatypeProperty rdf:about="#weightKg">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:domain rdf:resource="#Cargo"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#volumeM3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:domain rdf:resource="#Cargo"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#capacityKg">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#capacityM3">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#maxSpeedKmH">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#distanceKm">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#RouteSegment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#estimatedTransitTimeHours">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#trackingNumber">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#requiredTemperatureC">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#PerishableShipment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#hazardClass">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#HazardousShipment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#costUSD">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Shipment"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#isTemperatureControlled">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#Vehicle"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+</owl:DatatypeProperty>
+
+<owl:DatatypeProperty rdf:about="#eventTimestamp">
+  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  <rdfs:domain rdf:resource="#TransportEvent"/>
+  <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+</owl:DatatypeProperty>
+
+<owl:Class rdf:about="#Agent">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Vehicle">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#capacityKg"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Location">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Facility">
+  <rdfs:subClassOf rdf:resource="#Location"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Shipment">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasOrigin"/>
+      <owl:onClass rdf:resource="#Location"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasDestination"/>
+      <owl:onClass rdf:resource="#Location"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#transportedBy"/>
+      <owl:someValuesFrom rdf:resource="#Vehicle"/>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasStatus"/>
+      <owl:onClass rdf:resource="#ShipmentStatus"/>
+      <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#Cargo">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Route">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hasSegment"/>
+      <owl:onClass rdf:resource="#RouteSegment"/>
+      <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#RouteSegment">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TransportMode">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Order">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TransportEvent">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LogisticsDocument">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ShipmentStatus">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Carrier">
+  <rdfs:subClassOf rdf:resource="#Agent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Shipper">
+  <rdfs:subClassOf rdf:resource="#Agent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Consignee">
+  <rdfs:subClassOf rdf:resource="#Agent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Driver">
+  <rdfs:subClassOf rdf:resource="#Agent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#LogisticsServiceProvider">
+  <rdfs:subClassOf rdf:resource="#Agent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RoadVehicle">
+  <rdfs:subClassOf rdf:resource="#Vehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Truck">
+  <rdfs:subClassOf rdf:resource="#RoadVehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Van">
+  <rdfs:subClassOf rdf:resource="#RoadVehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Ship">
+  <rdfs:subClassOf rdf:resource="#Vehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Aircraft">
+  <rdfs:subClassOf rdf:resource="#Vehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Train">
+  <rdfs:subClassOf rdf:resource="#Vehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Drone">
+  <rdfs:subClassOf rdf:resource="#Vehicle"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Warehouse">
+  <rdfs:subClassOf rdf:resource="#Facility"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DistributionCenter">
+  <rdfs:subClassOf rdf:resource="#Facility"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Port">
+  <rdfs:subClassOf rdf:resource="#Facility"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Airport">
+  <rdfs:subClassOf rdf:resource="#Facility"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RailTerminal">
+  <rdfs:subClassOf rdf:resource="#Facility"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CustomerAddress">
+  <rdfs:subClassOf rdf:resource="#Location"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Package">
+  <rdfs:subClassOf rdf:resource="#Cargo"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Container">
+  <rdfs:subClassOf rdf:resource="#Cargo"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Pallet">
+  <rdfs:subClassOf rdf:resource="#Cargo"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PerishableShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#requiredTemperatureC"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#HazardousShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+  <rdfs:subClassOf>
+    <owl:Restriction>
+      <owl:onProperty rdf:resource="#hazardClass"/>
+      <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+    </owl:Restriction>
+  </rdfs:subClassOf>
+</owl:Class>
+
+<owl:Class rdf:about="#OversizedShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#OverloadedShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#RestrictedShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#AtRiskShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DelayedShipment">
+  <rdfs:subClassOf rdf:resource="#Shipment"/>
+</owl:Class>
+
+<owl:Class rdf:about="#PickupEvent">
+  <rdfs:subClassOf rdf:resource="#TransportEvent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DeliveryEvent">
+  <rdfs:subClassOf rdf:resource="#TransportEvent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#DelayEvent">
+  <rdfs:subClassOf rdf:resource="#TransportEvent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CustomsClearanceEvent">
+  <rdfs:subClassOf rdf:resource="#TransportEvent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TransshipmentEvent">
+  <rdfs:subClassOf rdf:resource="#TransportEvent"/>
+</owl:Class>
+
+<owl:Class rdf:about="#BillOfLading">
+  <rdfs:subClassOf rdf:resource="#LogisticsDocument"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Invoice">
+  <rdfs:subClassOf rdf:resource="#LogisticsDocument"/>
+</owl:Class>
+
+<owl:Class rdf:about="#CustomsDeclaration">
+  <rdfs:subClassOf rdf:resource="#LogisticsDocument"/>
+</owl:Class>
+
+<owl:Class rdf:about="#ProofOfDelivery">
+  <rdfs:subClassOf rdf:resource="#LogisticsDocument"/>
+</owl:Class>
+
+<owl:NamedIndividual rdf:about="#RoadMode">
+  <rdf:type rdf:resource="#TransportMode"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#RailMode">
+  <rdf:type rdf:resource="#TransportMode"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#SeaMode">
+  <rdf:type rdf:resource="#TransportMode"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#AirMode">
+  <rdf:type rdf:resource="#TransportMode"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Pending">
+  <rdf:type rdf:resource="#ShipmentStatus"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#InTransit">
+  <rdf:type rdf:resource="#ShipmentStatus"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Delayed">
+  <rdf:type rdf:resource="#ShipmentStatus"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Delivered">
+  <rdf:type rdf:resource="#ShipmentStatus"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Cancelled">
+  <rdf:type rdf:resource="#ShipmentStatus"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#PortOfShanghai">
+  <rdf:type rdf:resource="#Port"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#PortOfLosAngeles">
+  <rdf:type rdf:resource="#Port"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#ChicagoWarehouse">
+  <rdf:type rdf:resource="#Warehouse"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#MilanDistributionCenter">
+  <rdf:type rdf:resource="#DistributionCenter"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#OHareAirport">
+  <rdf:type rdf:resource="#Airport"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#CustomerAddress_001">
+  <rdf:type rdf:resource="#CustomerAddress"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#MaerskLine">
+  <rdf:type rdf:resource="#Carrier"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#FastFreightTrucking">
+  <rdf:type rdf:resource="#Carrier"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#SkyCargoAirlines">
+  <rdf:type rdf:resource="#Carrier"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#AcmeElectronics">
+  <rdf:type rdf:resource="#Shipper"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#BestValueRetail">
+  <rdf:type rdf:resource="#Consignee"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#DriverJohnSmith">
+  <rdf:type rdf:resource="#Driver"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Truck001">
+  <rdf:type rdf:resource="#Truck"/>
+  <operatedBy rdf:resource="#FastFreightTrucking"/>
+  <drivenBy rdf:resource="#DriverJohnSmith"/>
+  <capacityKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">20000.0</capacityKg>
+  <isTemperatureControlled rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</isTemperatureControlled>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#CargoShip_EverStar">
+  <rdf:type rdf:resource="#Ship"/>
+  <operatedBy rdf:resource="#MaerskLine"/>
+  <capacityKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">5000000.0</capacityKg>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#CargoPlane_001">
+  <rdf:type rdf:resource="#Aircraft"/>
+  <operatedBy rdf:resource="#SkyCargoAirlines"/>
+  <capacityKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">90000.0</capacityKg>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Route_ShanghaiToChicago">
+  <rdf:type rdf:resource="#Route"/>
+  <hasSegment rdf:resource="#Seg2_RoadLeg"/>
+  <hasSegment rdf:resource="#Seg1_SeaLeg"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Seg1_SeaLeg">
+  <rdf:type rdf:resource="#RouteSegment"/>
+  <departsFrom rdf:resource="#PortOfShanghai"/>
+  <arrivesAt rdf:resource="#PortOfLosAngeles"/>
+  <usesMode rdf:resource="#SeaMode"/>
+  <nextSegment rdf:resource="#Seg2_RoadLeg"/>
+  <distanceKm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">10500.0</distanceKm>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Seg2_RoadLeg">
+  <rdf:type rdf:resource="#RouteSegment"/>
+  <departsFrom rdf:resource="#PortOfLosAngeles"/>
+  <arrivesAt rdf:resource="#ChicagoWarehouse"/>
+  <usesMode rdf:resource="#RoadMode"/>
+  <distanceKm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3200.0</distanceKm>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Route_AirToMilan">
+  <rdf:type rdf:resource="#Route"/>
+  <hasSegment rdf:resource="#Seg3_AirLeg"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Seg3_AirLeg">
+  <rdf:type rdf:resource="#RouteSegment"/>
+  <departsFrom rdf:resource="#OHareAirport"/>
+  <arrivesAt rdf:resource="#MilanDistributionCenter"/>
+  <usesMode rdf:resource="#AirMode"/>
+  <distanceKm rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">7700.0</distanceKm>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#ElectronicsPallet">
+  <rdf:type rdf:resource="#Pallet"/>
+  <storedAt rdf:resource="#ChicagoWarehouse"/>
+  <weightKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">25000.0</weightKg>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#FreshProducePallet">
+  <rdf:type rdf:resource="#Pallet"/>
+  <weightKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8000.0</weightKg>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#LithiumBatteryContainer">
+  <rdf:type rdf:resource="#Container"/>
+  <weightKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4000.0</weightKg>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Shipment_001">
+  <rdf:type rdf:resource="#Shipment"/>
+  <hasOrigin rdf:resource="#PortOfLosAngeles"/>
+  <hasDestination rdf:resource="#ChicagoWarehouse"/>
+  <transportedBy rdf:resource="#Truck001"/>
+  <hasRoute rdf:resource="#Route_ShanghaiToChicago"/>
+  <contains rdf:resource="#ElectronicsPallet"/>
+  <shippedBy rdf:resource="#AcmeElectronics"/>
+  <consignedTo rdf:resource="#BestValueRetail"/>
+  <hasStatus rdf:resource="#InTransit"/>
+  <requiresDocument rdf:resource="#BOL_001"/>
+  <weightKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">25000.0</weightKg>
+  <trackingNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TLO-0001</trackingNumber>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Shipment_002">
+  <rdf:type rdf:resource="#PerishableShipment"/>
+  <hasOrigin rdf:resource="#PortOfShanghai"/>
+  <hasDestination rdf:resource="#ChicagoWarehouse"/>
+  <transportedBy rdf:resource="#CargoShip_EverStar"/>
+  <hasRoute rdf:resource="#Route_ShanghaiToChicago"/>
+  <contains rdf:resource="#FreshProducePallet"/>
+  <hasStatus rdf:resource="#InTransit"/>
+  <weightKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">8000.0</weightKg>
+  <requiredTemperatureC rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4.0</requiredTemperatureC>
+  <estimatedTransitTimeHours rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">96.0</estimatedTransitTimeHours>
+  <trackingNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TLO-0002</trackingNumber>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Shipment_003">
+  <rdf:type rdf:resource="#HazardousShipment"/>
+  <hasOrigin rdf:resource="#OHareAirport"/>
+  <hasDestination rdf:resource="#MilanDistributionCenter"/>
+  <transportedBy rdf:resource="#CargoPlane_001"/>
+  <hasRoute rdf:resource="#Route_AirToMilan"/>
+  <contains rdf:resource="#LithiumBatteryContainer"/>
+  <hasStatus rdf:resource="#Pending"/>
+  <requiresDocument rdf:resource="#CustomsForm_003"/>
+  <weightKg rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">4000.0</weightKg>
+  <hazardClass rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Class 9 - Miscellaneous Dangerous Goods</hazardClass>
+  <trackingNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TLO-0003</trackingNumber>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#Shipment_004">
+  <rdf:type rdf:resource="#Shipment"/>
+  <hasOrigin rdf:resource="#PortOfShanghai"/>
+  <hasDestination rdf:resource="#PortOfLosAngeles"/>
+  <transportedBy rdf:resource="#CargoShip_EverStar"/>
+  <hasStatus rdf:resource="#InTransit"/>
+  <hasEvent rdf:resource="#DelayEvent_001"/>
+  <trackingNumber rdf:datatype="http://www.w3.org/2001/XMLSchema#string">TLO-0004</trackingNumber>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#DelayEvent_001">
+  <rdf:type rdf:resource="#DelayEvent"/>
+  <occursAt rdf:resource="#PortOfShanghai"/>
+  <eventTimestamp rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2026-07-10T08:00:00</eventTimestamp>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#BOL_001">
+  <rdf:type rdf:resource="#BillOfLading"/>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="#CustomsForm_003">
+  <rdf:type rdf:resource="#CustomsDeclaration"/>
+</owl:NamedIndividual>
+
+<swrl:Variable rdf:about="urn:swrl#s"/>
+
+<swrl:Variable rdf:about="urn:swrl#v"/>
+
+<swrl:Variable rdf:about="urn:swrl#w"/>
+
+<swrl:Variable rdf:about="urn:swrl#c"/>
+
+<swrl:Variable rdf:about="urn:swrl#r"/>
+
+<swrl:Variable rdf:about="urn:swrl#seg"/>
+
+<swrl:Variable rdf:about="urn:swrl#t"/>
+
+<swrl:Variable rdf:about="urn:swrl#e"/>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Shipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hasEvent"/>
+              <swrl:argument1 rdf:resource="urn:swrl#s"/>
+              <swrl:argument2 rdf:resource="urn:swrl#e"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:ClassAtom>
+                  <swrl:classPredicate rdf:resource="#DelayEvent"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#e"/>
+                </swrl:ClassAtom>
+              </rdf:first>
+              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#DelayedShipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hasStatus"/>
+              <swrl:argument1 rdf:resource="urn:swrl#s"/>
+              <swrl:argument2 rdf:resource="#Delayed"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#PerishableShipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:DatavaluedPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#estimatedTransitTimeHours"/>
+              <swrl:argument1 rdf:resource="urn:swrl#s"/>
+              <swrl:argument2 rdf:resource="urn:swrl#t"/>
+            </swrl:DatavaluedPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:BuiltinAtom>
+                  <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                  <swrl:arguments>
+                    <rdf:Description>
+                      <rdf:first rdf:resource="urn:swrl#t"/>
+                      <rdf:rest>
+                        <rdf:Description>
+                          <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                          <rdf:first rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">72.0</rdf:first>
+                        </rdf:Description>
+                      </rdf:rest>
+                    </rdf:Description>
+                  </swrl:arguments>
+                </swrl:BuiltinAtom>
+              </rdf:first>
+              <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#AtRiskShipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#HazardousShipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#hasRoute"/>
+              <swrl:argument1 rdf:resource="urn:swrl#s"/>
+              <swrl:argument2 rdf:resource="urn:swrl#r"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:IndividualPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#hasSegment"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#r"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#seg"/>
+                </swrl:IndividualPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:IndividualPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#usesMode"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#seg"/>
+                      <swrl:argument2 rdf:resource="#AirMode"/>
+                    </swrl:IndividualPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#RestrictedShipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<swrl:Imp>
+  <swrl:body>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#Shipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest>
+        <rdf:Description>
+          <rdf:first>
+            <swrl:IndividualPropertyAtom>
+              <swrl:propertyPredicate rdf:resource="#transportedBy"/>
+              <swrl:argument1 rdf:resource="urn:swrl#s"/>
+              <swrl:argument2 rdf:resource="urn:swrl#v"/>
+            </swrl:IndividualPropertyAtom>
+          </rdf:first>
+          <rdf:rest>
+            <rdf:Description>
+              <rdf:first>
+                <swrl:DatavaluedPropertyAtom>
+                  <swrl:propertyPredicate rdf:resource="#weightKg"/>
+                  <swrl:argument1 rdf:resource="urn:swrl#s"/>
+                  <swrl:argument2 rdf:resource="urn:swrl#w"/>
+                </swrl:DatavaluedPropertyAtom>
+              </rdf:first>
+              <rdf:rest>
+                <rdf:Description>
+                  <rdf:first>
+                    <swrl:DatavaluedPropertyAtom>
+                      <swrl:propertyPredicate rdf:resource="#capacityKg"/>
+                      <swrl:argument1 rdf:resource="urn:swrl#v"/>
+                      <swrl:argument2 rdf:resource="urn:swrl#c"/>
+                    </swrl:DatavaluedPropertyAtom>
+                  </rdf:first>
+                  <rdf:rest>
+                    <rdf:Description>
+                      <rdf:first>
+                        <swrl:BuiltinAtom>
+                          <swrl:builtin rdf:resource="http://www.w3.org/2003/11/swrlb#greaterThan"/>
+                          <swrl:arguments>
+                            <rdf:Description>
+                              <rdf:first rdf:resource="urn:swrl#w"/>
+                              <rdf:rest>
+                                <rdf:Description>
+                                  <rdf:first rdf:resource="urn:swrl#c"/>
+                                  <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                                </rdf:Description>
+                              </rdf:rest>
+                            </rdf:Description>
+                          </swrl:arguments>
+                        </swrl:BuiltinAtom>
+                      </rdf:first>
+                      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+                    </rdf:Description>
+                  </rdf:rest>
+                </rdf:Description>
+              </rdf:rest>
+            </rdf:Description>
+          </rdf:rest>
+        </rdf:Description>
+      </rdf:rest>
+    </rdf:Description>
+  </swrl:body>
+  <swrl:head>
+    <rdf:Description>
+      <rdf:first>
+        <swrl:ClassAtom>
+          <swrl:classPredicate rdf:resource="#OverloadedShipment"/>
+          <swrl:argument1 rdf:resource="urn:swrl#s"/>
+        </swrl:ClassAtom>
+      </rdf:first>
+      <rdf:rest rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"/>
+    </rdf:Description>
+  </swrl:head>
+</swrl:Imp>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Pending"/>
+    <rdf:Description rdf:about="#InTransit"/>
+    <rdf:Description rdf:about="#Delayed"/>
+    <rdf:Description rdf:about="#Delivered"/>
+    <rdf:Description rdf:about="#Cancelled"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+<owl:AllDifferent>
+  <owl:distinctMembers rdf:parseType="Collection">
+    <rdf:Description rdf:about="#RoadMode"/>
+    <rdf:Description rdf:about="#RailMode"/>
+    <rdf:Description rdf:about="#SeaMode"/>
+    <rdf:Description rdf:about="#AirMode"/>
+  </owl:distinctMembers>
+</owl:AllDifferent>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#BillOfLading"/>
+    <rdf:Description rdf:about="#Invoice"/>
+    <rdf:Description rdf:about="#CustomsDeclaration"/>
+    <rdf:Description rdf:about="#ProofOfDelivery"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#PickupEvent"/>
+    <rdf:Description rdf:about="#DeliveryEvent"/>
+    <rdf:Description rdf:about="#DelayEvent"/>
+    <rdf:Description rdf:about="#CustomsClearanceEvent"/>
+    <rdf:Description rdf:about="#TransshipmentEvent"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Warehouse"/>
+    <rdf:Description rdf:about="#DistributionCenter"/>
+    <rdf:Description rdf:about="#Port"/>
+    <rdf:Description rdf:about="#Airport"/>
+    <rdf:Description rdf:about="#RailTerminal"/>
+    <rdf:Description rdf:about="#CustomerAddress"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Carrier"/>
+    <rdf:Description rdf:about="#Shipper"/>
+    <rdf:Description rdf:about="#Consignee"/>
+    <rdf:Description rdf:about="#Driver"/>
+    <rdf:Description rdf:about="#LogisticsServiceProvider"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#Truck"/>
+    <rdf:Description rdf:about="#Van"/>
+    <rdf:Description rdf:about="#Ship"/>
+    <rdf:Description rdf:about="#Aircraft"/>
+    <rdf:Description rdf:about="#Train"/>
+    <rdf:Description rdf:about="#Drone"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+
+</rdf:RDF>
